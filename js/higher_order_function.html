@@ -4,7 +4,7 @@
 
 <!-- Mirrored from www.w3schools.com/js/default.asp by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Jun 2022 10:20:41 GMT -->
 <head>
-<title>Array reduce() method</title>
+<title>Higher Order Functions</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="Keywords" content="HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website">
@@ -422,7 +422,11 @@ function click_darkcode() {
 <a target="_top" href="let_const_var.html">Let Cosnt Ver</a>
 <a target="_top" href="closer.html">Closer</a>
 <a target="_top" href="hoisting.html">hoisting</a>
-<a target="_top" href="this_call_apply_bind.html">'this' keyword.call(), .apply() and .bind()
+<a target="_top" href="this_call_apply_bind.html">'this' keyword.call(), .apply() and .bind()</a>
+<a target="_top" href="higher_order_function.html">Higher Order Functions</a>
+<a target="_top" href="asynchronous_javaScript.html">Asynchronous JavaScript</a>
+
+
 
 
 
@@ -474,83 +478,152 @@ function click_darkcode() {
 
 
 
-      <a href="https://youtu.be/pT9xqCS8Vwk" target="_blank">
-        <h1> JavaScript Hoisting</h1></a>
+      <a href="https://youtu.be/eKrSOaoNHPM?list=PLHiZ4m8vCp9Nflbo9a0pZuLscG_Xc7DKq" target="_blank">
+        <h1>Higher Order Functions</h1></a>
     
 <div class="w3-panel w3-info intro">
-
+<p>Higher Order Function এটা অন্য একটি ফাংশনের উপর কাজ করে, অন্য ফংশনকে প্যরামিটার করে অথবা অন্য ফাংশনে কে প্যরামিটার করে, অথবা দুটোই।</p>
 <code class="w3-codespan">
-   
+   function higherorder () { <br>
+  return function() { <br>
+    console.log('Hellow world'); <br>
+  }<br>
+}<br>
+<br>
+higherorder()();<br>
 
 </code>
-<p> var , let , const সবই হেয়েসটিং হয় পথার্ক হলো</p>
+<p>বিভিন্ন বিল্ডইন এ্যরে মেথড, যেমন, map, filter, reduce ইত্যাদি Higer order function উদাহারন </p>
+</div>
+<h2>Example 1</h2>
+<div class="w3-panel w3-info intro">
+  <h3>Traditiona way </h3>
+  
+    <code class="w3-codespan">
+     var number = [1, 2, 3]; <br>
+<br>
+var balod = []; <br>
+<br>
+for( let i = 0;  i < number.length;  i++){ <br>
+  balod.push(number[i] * 2); <br>
+}<br>
+<br>
+console.log(balod); <br> <br>
+
+
+var number = [5, 2, 3];
+<br>
+var balod = number.map(function(itemes){ <br>
+  return itemes * 6 ; <br>
+});<br> <br>
+
+<br>
+console.log(balod);
+</code>
+
+<h3>Higer Order Example</h3>
+
+
+ <code class="w3-codespan">
+
+var number = [5, 2, 3]; <br> <br>
+
+var balod = number.map(function(itemes){ <br>
+  return itemes * 6 ; <br>
+}); <br><br>
+
+
+console.log(balod);
+
+</code>
+
+
 </div>
 
-<div class="w3-panel w3-info intro">
-    <p> Var তার scop এ ডিভল্ট ভাবে একটা undefined value সেট করে রাখে </p>    
-    <p> let যে খানে ডিফাইন হয় সেখানে undefined value সেট করে </p>
+<h2>Example 2</h2>     
+<div class="w3-example"><p>
+<p>Simple Example</p>
+<code class="w3-codespan">
+var payers = [ <br>
+  { <br>
+    name: "Musfiq", <br>
+    avg: 37.20, <br>
+  }, <br>
+<br>
+  {<br>
+    name: "Sakib", <br>
+    avg: 39.20, <br>
+  } ,   <br>
+<br>
+  { <br>
+    name: "Mash", <br>
+    avg: 40.20, <br>
+  } <br>
+]<br>
+<br>
+var bestpayer = []; <br>
+<br>
+for (let i = 0;  i < payers.length; i++ ) { <br>
+  if (payers[i].avg >= 30) { <br>
+    bestpayer.push(payers[i]); <br>
+  } <br>
+}<br>
+<br>
+
+console.log(bestpayer);
+
+</code>
+
+   <p>Higher Order Example</p>
     <code class="w3-codespan">
-        var lan = "Java";<br>
-var LAN = "Python"; <br><br>
+      var payers = [ <br>
+  { <br>
+    name: "Musfiq", <br>
+    avg: 37.20, <br>
+  }, <br>
+<br>
+  { <br>
+    name: "Sakib", <br>
+    avg: 39.20, <br>
+  } ,  <br>
+<br>
+  { <br>
+    name: "Mash", <br>
+    avg: 40.20, <br>
+  } <br>
+] <br>
 
+<br>
+var bestPlayer = payers.filter((player) => player.avg >= 39); <br>
+<br>
+console.log(bestPlayer);
+    </code>
+</div>
 
-function resutla() { <br>
-  if (!lan) { <br>
-    var lan = LAN;  <br>
-  }<br><br>
-
-  return lan; <br>
+<h2>Map Higher Order Function create</h2>     
+<div class="w3-example"><p>
+<p>Map এর ফাংশন টা তৈরী করা</p>
+<code class="w3-codespan">
+const city = ["khulna", "Dhaka", "Bogura"];<br>
+<br>
+function mymap (arr, fun) {<br>
+  let newArr = [];<br>
+  for (let i = 0; i < arr.length; i++) {<br>
+    newArr.push(fun(arr[i]));<br>
+  }<br>
+  return newArr;<br>
 }<br>
 
-console.log(resutla());
+<br>
+const myres = mymap(city, function (langu) {<br>
+<br>
+  return langu.length; <br>
+});<br>
 
-    </code>
-
-
-
-<code class="w3-codespan">
- 
-
-</code>
-
-
-
-<code class="w3-codespan">
-    
-</code>
-
+console.log(myres);<br>
 
 </div>
 
-<h2></h2>     
-<div class="w3-example">
-
-
-
-<code class="w3-codespan">
-   
-     
-
-</code>
-
-   
-</div>
-<h2></h2>
-<div class="w3-example">
-
-   
-
-    <code class="w3-codespan">
-       
-        
-        
-    </code>
-    <p></p>
-    <code class="w3-codespan">
-     
-</code>
-       
-    </div>
 
 
 

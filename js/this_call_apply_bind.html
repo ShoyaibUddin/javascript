@@ -422,7 +422,10 @@ function click_darkcode() {
 <a target="_top" href="let_const_var.html">Let Cosnt Ver</a>
 <a target="_top" href="closer.html">Closer</a>
 <a target="_top" href="hoisting.html">hoisting</a>
-<a target="_top" href="this_call_apply_bind.html">'this' keyword.call(), .apply() and .bind()
+<a target="_top" href="this_call_apply_bind.html">'this' keyword.call(), .apply() and .bind()</a>
+<a target="_top" href="higher_order_function.html">Higher Order Functions</a>
+
+
 
 
 
@@ -474,8 +477,8 @@ function click_darkcode() {
 
 
 
-      <a href="https://youtu.be/pT9xqCS8Vwk" target="_blank">
-        <h1> JavaScript Hoisting</h1></a>
+      <a href="https://youtu.be/uZqyRJkTQog?list=PLHiZ4m8vCp9Nflbo9a0pZuLscG_Xc7DKq" target="_blank">
+        <h1> .call(), .apply() and .bind()</h1></a>
     
 <div class="w3-panel w3-info intro">
 
@@ -483,76 +486,154 @@ function click_darkcode() {
    
 
 </code>
-<p> var , let , const সবই হেয়েসটিং হয় পথার্ক হলো</p>
+<p> This kew work 4 ভাবে হয়</p>
+<ul>
+      <li>Implicit Binding</li>
+       <li>Explicit Binding</li>
+       <li>new Binding</li>
+       <li>Window Binding</li>
+    </ul>
 </div>
 
 <div class="w3-panel w3-info intro">
-    <p> Var তার scop এ ডিভল্ট ভাবে একটা undefined value সেট করে রাখে </p>    
-    <p> let যে খানে ডিফাইন হয় সেখানে undefined value সেট করে </p>
+  <h3>implicit Binding </h3>
+    
+  <p>implicit Binding মূলত পরোক্ষ ভাবে যেটা দেখা যায়। এক্ষেতে তিনটা বিষয় খেয়াল করে বুঝতে হবে</p>
+  <ul>
+      <li>function টা কোথায় কল হয়েছে</li>
+       <li>কল হওয়া ফংশনের আগে dot নোটেশন আছে কিনা</li>
+       <li>dot নোটেশনের আগে যেটা আছে সেটাই হলো this</li>
+    </ul>
     <code class="w3-codespan">
-        var lan = "Java";<br>
-var LAN = "Python"; <br><br>
-
-
-function resutla() { <br>
-  if (!lan) { <br>
-    var lan = LAN;  <br>
-  }<br><br>
-
-  return lan; <br>
+      var kin =  { <br>
+  name: "sakib", <br>
+  age: 35, <br>
+  do: function() { <br>
+    console.log(this.name); <br>
+  }, <br>
+  father: { <br>
+    name: "Mr, xxx", <br>
+    doi: function(){ <br>
+      console.log(this.name); <br>
+    }<br>
+  }<br>
 }<br>
 
-console.log(resutla());
+<br>
+kin.father.doi();
 
     </code>
 
 
+
+
+
+
+
+
+
+</div>
+
+<h2> Explicit Binding</h2>     
+<div class="w3-example"><p>
+
+
+call() দিয়ে আমরা this কে বলেদেতে পারি যে this কে হবে। দুইটা প্যথম প্যরামিটারে অবজেক্টের নাম, দ্বিতিয় প্যরামিটিগুলোতে যদি কোন ভারিয়েবল থাকে </p>
 
 <code class="w3-codespan">
  
+var  doan = function(a, b, c) { <br>
+  console.log(`${this.name} is ${a}, ${b} and ${c}`); <br>
 
-</code>
+};
 
-
-
-<code class="w3-codespan">
-    
-</code>
-
-
-</div>
-
-<h2></h2>     
-<div class="w3-example">
-
-
-
-<code class="w3-codespan">
-   
-     
+var kin =  {<br>
+  name: "sakib",<br>
+  age: 35,<br>
+};<br>
+<br>
+var v1 = "hadnsome";<br>
+var v2 = "All-rounder";<br>
+var v3 = "Best Palyer";<br>
+<br>
+doan.call(kin, v1, v2, v3);
 
 </code>
 
    
 </div>
-<h2></h2>
 <div class="w3-example">
+<p>
 
+
+apply() দিয়ে আমরা this কে বলেদেতে পারি যে this কে হবে। দুইটা প্যথম প্যরামিটারে অবজেক্টের নাম, দ্বিতিয় প্যরামিটি একটা Array হবে</p>
    
 
     <code class="w3-codespan">
        
         
+var  doan = function(a, b, c) { <br>
+  console.log(`${this.name} is ${a}, ${b} and ${c}`); <br>
+};<br>
+ <br>
+var kin =  {<br>
+  name: "sakib", <br>
+  age: 35, <br>
+};<br>
+<br>
+var v1 = "hadnsome"; <br>
+var v2 = "All-rounder"; <br>
+var v3 = "Best Palyer";<br>
+<br>
+var thisArr = [v1, v2, v3] <br>
+<br>
+doan.apply(kin, thisArr);
+
         
     </code>
-    <p></p>
+
+    <p>.bind() এটা হুবুহু call এর মত কাজ করে তাবে শুধু মাত্র এটা একটা নতুন ইনেট্যন্স ফংশন রিটার্ন করে</p>
     <code class="w3-codespan">
      
+var  doan = function(a, b, c) {<br>
+  console.log(`${this.name} is ${a}, ${b} and ${c}`); <br>
+};<br>
+<br>
+var kin =  { <br>
+  name: "sakib", <br>
+  age: 35,<br>
+}; <br>
+<br>
+
+var v1 = "hadnsome";<br>
+var v2 = "All-rounder";<br>
+var v3 = "Best Palyer";<br>
+<br>
+<br>
+
+let ami = doan.bind(kin, v1, v2, v3); <br>
+<br>
+ami();
 </code>
        
-    </div>
+</div>
 
+<h2> new Binding</h2>     
+<div class="w3-example">
+  <p>এটা মুলত কনসট্রাকটরের মাধ্যমে যে new keywork ব্যবহার কারার মাধ্যমে যে this টা তৈরী হয়</p>
 
+   <code class="w3-codespan">
+     function Person (name, age) { <br>
+  this.name = name; <br>
+  this.age = age; <br>
+<br>
+  console.log(`${this.name} is ${this.age} yars old`); <br>
+}<br>
+<br>
+let sakib = new Person("Sakib", 35);
+
+    </code>
+</div>
 
 <style>  
 

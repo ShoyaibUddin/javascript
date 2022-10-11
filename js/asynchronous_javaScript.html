@@ -4,7 +4,7 @@
 
 <!-- Mirrored from www.w3schools.com/js/default.asp by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Jun 2022 10:20:41 GMT -->
 <head>
-<title>Array reduce() method</title>
+<title>Higher Order Functions</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="Keywords" content="HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website">
@@ -422,7 +422,11 @@ function click_darkcode() {
 <a target="_top" href="let_const_var.html">Let Cosnt Ver</a>
 <a target="_top" href="closer.html">Closer</a>
 <a target="_top" href="hoisting.html">hoisting</a>
-<a target="_top" href="this_call_apply_bind.html">'this' keyword.call(), .apply() and .bind()
+<a target="_top" href="this_call_apply_bind.html">'this' keyword.call(), .apply() and .bind()</a>
+<a target="_top" href="higher_order_function.html">Higher Order Functions</a>
+<a target="_top" href="asynchronous_javaScript.html">Asynchronous JavaScript</a>
+
+
 
 
 
@@ -474,83 +478,152 @@ function click_darkcode() {
 
 
 
-      <a href="https://youtu.be/pT9xqCS8Vwk" target="_blank">
-        <h1> JavaScript Hoisting</h1></a>
+      <a href="https://youtu.be/IUBd76UQb34?list=PLHiZ4m8vCp9Nflbo9a0pZuLscG_Xc7DKq" target="_blank">
+        <h1>Asynchronous JavaScript </h1></a>
     
 <div class="w3-panel w3-info intro">
-
+<p>Asynchronous JavaScript Hell</p>
 <code class="w3-codespan">
-   
+   const takeorder = (person1, callback) => { <br>
+  console.log(`Order got form ${person1}`); <br>
+<br>
+  callback(person1);<br>
+}<br>
+<br>
+const processOrder = (person1, callback) => {<br>
+<br>
+  setTimeout(function() {<br>
+    console.log(`We cooking for ${person1}`);<br>
+    console.log(`We serve the food`);<br>
+    callback(person1);<br>
+  },3000);<br>
+  <br>
+  
+}<br>
+<br>
+const orderComplite = (person1) => {<br>
+  console.log(`The order has been complited for ${person1}`);<br>
+}<br>
+<br>
+
+takeorder('Sakib', function(person1){<br>
+  processOrder(person1, function(person1) {<br>
+    orderComplite(person1);<br>
+  });<br>
+});<br>
+
 
 </code>
-<p> var , let , const সবই হেয়েসটিং হয় পথার্ক হলো</p>
+
+</div>
+<h2>Promise তৈরী করা সেটা কে আর একটা প্রমিজ এর সাথে চেইন করা এবং তার আউটপুট বের করা</h2>
+<div class="w3-panel w3-info intro">
+  
+<code class="w3-codespan">
+    const hastMetting = false; <br>
+<br>
+let promi = new Promise(function(resolve, reject){ <br>
+<br>
+  if (!hastMetting) { <br>
+    let newMetting = { <br>
+      name: "Google", <br>
+      time: 2.50 <br>
+    }<br>
+    resolve(newMetting);<br>
+  } else {<br>
+    reject(new Error("the Metting has beeng schedeuled"))<br>
+  }<br>
+});<br>
+<br>
+let maa = (newMetting) => {<br>
+    let kk = `${newMetting.name} is good ${newMetting.time}`;<br>
+    return Promise.resolve(kk);<br>
+}<br>
+<br>
+<br>
+promi<br>
+.then(maa)<br>
+.then((res)=>{<br>
+  console.log(res);<br>
+})<br>
+.catch((err) => {<br>
+  console.log<br>
+})<br>
+</code>
+
+
 </div>
 
-<div class="w3-panel w3-info intro">
-    <p> Var তার scop এ ডিভল্ট ভাবে একটা undefined value সেট করে রাখে </p>    
-    <p> let যে খানে ডিফাইন হয় সেখানে undefined value সেট করে </p>
+<h2>কয়েকটা Promize এর রেজাল্ট যদি একসাথে পেতে চাই</h2>     
+<div class="w3-example"><p>
+<code class="w3-codespan">
+let promi1 = Promise.resolve("promize 1  is resolved"); <br>
+let promi2 = new Promise((resolve, rejecyt)=>{<br>
+  setTimeout(()=>{<br>
+    resolve("Promize 2 is resolved");<br>
+  }, 2000);<br>
+});<br>
+<br>
+let promi3 = Promise.resolve("promize 3  is resolved");<br>
+<br>
+promi1.then((res) => console.log(res));<br>
+promi2.then((res) => console.log(res));<br>
+promi3.then((res) => console.log(res));<br>
+
+</code>
+
+   <p>সব Promise এর রেজাল্ট যদি আমার একবারে দেখতে চাই </p>
     <code class="w3-codespan">
-        var lan = "Java";<br>
-var LAN = "Python"; <br><br>
-
-
-function resutla() { <br>
-  if (!lan) { <br>
-    var lan = LAN;  <br>
-  }<br><br>
-
-  return lan; <br>
-}<br>
-
-console.log(resutla());
-
+     let promi1 = Promise.resolve("promize 1  is resolved"); <br>
+let promi2 = new Promise((resolve, rejecyt)=>{ <br>
+  setTimeout(()=>{ <br>
+    resolve("Promize 2 is resolved"); <br>
+  }, 2000);<br>
+}); <br>
+<br>
+let promi3 = Promise.resolve("promize 3  is resolved");<br>
+<br>
+Promise.all([promi1, promi2, promi3]) <br>
+.then ((res)=>{<br>
+  console.log(res);<br>
+})
     </code>
 
-
-
+    <p> Promise গুলোর ভিতরে যে আগে রেসপন্স করবে সেই একটা পেতে চাইলে </p>
 <code class="w3-codespan">
- 
+  let promixe1 = new Promise((resolve, reject) => { <br>
+  setTimeout(()=> { <br>
+    resolve('Primixe 1');  <br>
+  }, 4000)<br>
+}); <br>
+let promixe2 = new Promise((resolve, reject) => {  <br>
+  setTimeout(()=> { <br>
+    resolve('Primixe 2'); <br>
+  }, 3000) <br>
+});<br>
+<br>
+let promixe3 = new Promise((resolve, reject) => { <br>
+  setTimeout(()=> { <br>
+    resolve('Primixe 3'); <br>
+  }, 2000) <br>
+}); <br>
+<br>
 
+Promise.race([promixe1, promixe2, promixe3]) <br>
+.then((res) => { <br>
+  console.log(res) <br>
+}) <br>
 </code>
-
-
-
-<code class="w3-codespan">
-    
-</code>
-
 
 </div>
 
 <h2></h2>     
-<div class="w3-example">
-
-
-
+<div class="w3-example"><p>
 <code class="w3-codespan">
-   
-     
-
 </code>
 
-   
 </div>
-<h2></h2>
-<div class="w3-example">
 
-   
-
-    <code class="w3-codespan">
-       
-        
-        
-    </code>
-    <p></p>
-    <code class="w3-codespan">
-     
-</code>
-       
-    </div>
 
 
 
